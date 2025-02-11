@@ -1,0 +1,15 @@
+src/
+├── bot/               # Bot logic
+│   ├── commands.js    # /start, /securelink handlers
+├── models/            # Database models
+│   └── Link.js
+├── routes/            # Express routes
+│   └── api.js         # /api/resolve endpoint
+├── utils/             # Helpers
+│   └── logger.js      # Custom logger
+└── app.js             # Main entry
+
+flow:
+User → /securelink → Bot → Store in DB → Generate Masked Link
+                      ↓
+User Clicks Link → Bot → Mini-App → API → DB → Redirect (tg://)
