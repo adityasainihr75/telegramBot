@@ -38,7 +38,21 @@ router.post("/resolve", async (req, res) => {
     }
 
     // Find the user by telegramUserId or create a new one.
-    
+    let user = await User.findOne({ telegramUserId });
+    if (!user) {
+      user = new User({
+        telegramUserId,
+        firstName,
+        lastName,
+        username,
+      });
+      await user.save();
+      logger.info(`Created new user: ${user._id} ${user.firstName}`);
+    }
+    // logger.info(`Link updated: ${link.uuid}  times`);
+    logger.info(
+      `Link clicked By : ${firstName} ${lastName} Having Id ${telegramUserId} `
+    );
      // Check the in-memory map first
      if (recentLinksMap.has(uuid)) {
       logger.info(`Memory cache hit for uuid: ${uuid}`);
@@ -63,21 +77,7 @@ router.post("/resolve", async (req, res) => {
       originalLink: link.originalLink,
     };
     res.json(responseData);
-    let user = await User.findOne({ telegramUserId });
-    if (!user) {
-      user = new User({
-        telegramUserId,
-        firstName,
-        lastName,
-        username,
-      });
-      await user.save();
-      logger.info(`Created new user: ${user._id} ${user.firstName}`);
-    }
-    // logger.info(`Link updated: ${link.uuid}  times`);
-    logger.info(
-      `Link clicked By : ${firstName} ${lastName} Having Id ${telegramUserId} `
-    );
+    
     // Cache the response. Set an expiration time (e.g., 1 hour = 3600 seconds)
     try {
       await redisClient.setEx(
