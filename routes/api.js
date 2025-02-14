@@ -24,7 +24,6 @@ loadRecentLinks(); // Initial load on startup
 
 router.post("/resolve", async (req, res) => {
   try {
-    // Destructure and rename fields as needed.
     const {
       uuid,
       id: telegramUserId,
@@ -37,58 +36,66 @@ router.post("/resolve", async (req, res) => {
       return res.status(400).json({ error: "UUID parameter required" });
     }
 
-    // Find the user by telegramUserId or create a new one.
-    let user = await User.findOne({ telegramUserId });
-    if (!user) {
-      user = new User({
-        telegramUserId,
-        firstName,
-        lastName,
-        username,
-      });
-      await user.save();
-      logger.info(`Created new user: ${user._id} ${user.firstName}`);
-    }
-    // logger.info(`Link updated: ${link.uuid}  times`);
-    logger.info(
-      `Link clicked By : ${firstName} ${lastName} Having Id ${telegramUserId} `
-    );
-     // Check the in-memory map first
-     if (recentLinksMap.has(uuid)) {
+    let responseData;
+
+    // Try in-memory cache first.
+    if (recentLinksMap.has(uuid)) {
       logger.info(`Memory cache hit for uuid: ${uuid}`);
-      return res.json({ originalLink: recentLinksMap.get(uuid).originalLink });
-    }
-    const cachedResponse = await redisClient.get(`link:${uuid}`);
-    if (cachedResponse) {
-      logger.info(`Cache hit for uuid: ${uuid}`);
-      return res.json(JSON.parse(cachedResponse));
+      responseData = { originalLink: recentLinksMap.get(uuid).originalLink };
+    } else {
+      // Check Redis cache.
+      const cachedResponse = await redisClient.get(`link:${uuid}`);
+      if (cachedResponse) {
+        logger.info(`Redis cache hit for uuid: ${uuid}`);
+        responseData = JSON.parse(cachedResponse);
+      } else {
+        // Retrieve link from database.
+        const link = await Link.findOne({ uuid });
+        if (!link) {
+          return res.status(404).json({ error: "Link not found" });
+        }
+        // Save link to in-memory cache.
+        recentLinksMap.set(uuid, link);
+        responseData = { originalLink: link.originalLink };
+
+        // Cache the response in Redis in the background.
+        process.nextTick(async () => {
+          try {
+            await redisClient.setEx(
+              `link:${uuid}`,
+              3600,
+              JSON.stringify(responseData)
+            );
+          } catch (cacheError) {
+            logger.error(`Redis cache error: ${cacheError.message}`);
+          }
+        });
+      }
     }
 
-    // Find the link by uuid .
-    const link = await Link.findOne({ uuid });
-    
-    if (!link) {
-      return res.status(404).json({ error: "Link not found" });
-    }else{
-      recentLinksMap.set(uuid, link.originalLink);
-      logger.info("setted link in map");
-    }
-    const responseData = {
-      originalLink: link.originalLink,
-    };
+    // Send the response immediately.
     res.json(responseData);
-    
-    // Cache the response. Set an expiration time (e.g., 1 hour = 3600 seconds)
-    try {
-      await redisClient.setEx(
-        `link:${uuid}`,
-        3600,
-        JSON.stringify(responseData)
-      );
-    } catch (cacheError) {
-      logger.error(`Redis cache error: ${cacheError.message}`);
-    }
-    res.json(responseData);
+
+    // Now, in the background, check if the user exists and store if not.
+    process.nextTick(async () => {
+      try {
+        let user = await User.findOne({ telegramUserId });
+        if (!user) {
+          user = new User({
+            telegramUserId,
+            firstName,
+            lastName,
+            username,
+          });
+          await user.save();
+          logger.info(`Created new user: ${user._id} ${user.firstName}`);
+        } else {
+          logger.info(`User already exists: ${user._id} ${user.firstName}`);
+        }
+      } catch (userError) {
+        logger.error(`Error checking/creating user: ${userError.message}`);
+      }
+    });
   } catch (error) {
     logger.error(`API Error: ${error.message}`);
     res.status(500).json({ error: "Internal server error" });
