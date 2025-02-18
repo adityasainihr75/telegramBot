@@ -7,11 +7,19 @@ const apiRouter = require('./routes/api.js');
 const logger = require('./utils/logger.js');
 const cors=require("cors");
 const app = express();
+const {User,updateExistingDocuments} = require('./models/User.js');
 const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
-
+// Add at the start of your app
+if (!process.env.BOT_TOKEN || !process.env.BOT_OWNER_ID) {
+  throw new Error('Required environment variables are not set');
+}
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => logger.info('Connected to MongoDB'))
+  .then(async() =>{
+    logger.info('Connected to MongoDB');
+    await updateExistingDocuments();
+    logger.info('Timestamp migration completed');
+  })
   .catch(error => logger.error(`MongoDB connection error: ${error.message}`));
 
 // Middleware

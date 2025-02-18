@@ -88,9 +88,33 @@ router.post("/resolve", async (req, res) => {
             username,
           });
           await user.save();
+          // Then, find the link you want to update (using your identifier, e.g., uuid)
+          const link = await Link.findOne({ uuid: uuid });
+          if (link) {
+              link.joinedUsers.push(user._id);
+              await link.save(); // Save the updated link document
+          }
           logger.info(`Created new user: ${user._id} ${user.firstName}`);
         } else {
           logger.info(`User already exists: ${user._id} ${user.firstName}`);
+        }
+        // Update the link's joinedUsers array regardless of whether the user is new
+        try {
+          const link = await Link.findOne({ uuid: uuid });
+          if (link) {
+            // Check if the user is already in the array to avoid duplicates
+            if (!link.joinedUsers.includes(user._id)) {
+              link.joinedUsers.push(user._id);
+              await link.save();
+              logger.info(`Added user ${user._id} to link ${uuid}`);
+            } else {
+              logger.info(`User ${user._id} is already in link ${uuid}`);
+            }
+          } else {
+            logger.warn(`No link found with uuid: ${uuid}`);
+          }
+        } catch (err) {
+          logger.error('Error updating joinedUsers:', err);
         }
       } catch (userError) {
         logger.error(`Error checking/creating user: ${userError.message}`);
