@@ -20,26 +20,26 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 // Migration function to update existing documents
-async function updateExistingDocuments() {
-  try {
-    // Update documents missing createdAt field (if any)
-    const result = await User.updateMany(
-      { createdAt: { $exists: false } },
-      [
-        {
-          $set: {
-            createdAt: { $ifNull: ["$updatedAt", new Date()] }
-          }
-        }
-      ]
-    );
+// async function updateExistingDocuments() {
+//   try {
+//     // Update documents missing createdAt field (if any)
+//     const result = await User.updateMany(
+//       { createdAt: { $exists: false } },
+//       [
+//         {
+//           $set: {
+//             createdAt: { $ifNull: ["$updatedAt", new Date()] }
+//           }
+//         }
+//       ]
+//     );
 
-    console.log(`Updated ${result.modifiedCount} documents`);
-  } catch (err) {
-    console.error('Error during migration:', err);
-  }
-  // Remove connection close if the app needs MongoDB later
-  // mongoose.connection.close();
-}
+//     console.log(`Updated ${result.modifiedCount} documents`);
+//   } catch (err) {
+//     console.error('Error during migration:', err);
+//   }
+//   // Remove connection close if the app needs MongoDB later
+//   // mongoose.connection.close();
+// }
 
-module.exports = { User, updateExistingDocuments };
+module.exports = { User,  };

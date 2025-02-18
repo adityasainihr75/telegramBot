@@ -452,7 +452,7 @@ const handleNewestUsers = async (chatId, thresholdDate) => {
     // Prompt the admin to type the message to send to these users.
     await bot.sendMessage(
       chatId,
-      `📝 Found ${users.length} oldest users. Please type the message you want to send to these users:`
+      `📝 Found ${users.length} newest users who joined on or after this period. Please type the message you want to send to these users:`
     );
   } catch (err) {
     console.error('Error fetching users:', err);
@@ -489,7 +489,7 @@ const handleOldestUsers = async (chatId, thresholdDate) => {
     // Prompt the admin to type the message to send to these users.
     await bot.sendMessage(
       chatId,
-      `📝 Found ${users.length} oldest users. Please type the message you want to send to these users:`
+      `📝 Found ${users.length} oldest users who joined on or after this period.. Please type the message you want to send to these users:`
     );
   } catch (err) {
     console.error('Error fetching users:', err);
