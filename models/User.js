@@ -1,4 +1,4 @@
-// First, let's fix the schema to handle both new and existing documents
+// models/User.js
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -11,47 +11,35 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  lastName: {
-    type: String
-  },
-  username: {
-    type: String
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now
-  }
-},{
-  timestamps: true
+  lastName: String,
+  username: String
+}, {
+  timestamps: true  // Automatically handles createdAt and updatedAt
 });
 
 const User = mongoose.model('User', userSchema);
 
-// Create a function to migrate existing data
-// async function updateExistingDocuments() {
-//     // Update missing createdAt fields
-//     const result = await User.updateMany(
-//       { createdAt: { $exists: false } }, // Target documents missing createdAt
-//       [
-//         {
-//           $set: {
-//             createdAt: { $ifNull: ["$updatedAt", new Date()] } // Copy updatedAt if exists, else use current date
-//           }
-//         }
-//       ]
-//     );
+// Migration function to update existing documents
+async function updateExistingDocuments() {
+  try {
+    // Update documents missing createdAt field (if any)
+    const result = await User.updateMany(
+      { createdAt: { $exists: false } },
+      [
+        {
+          $set: {
+            createdAt: { $ifNull: ["$updatedAt", new Date()] }
+          }
+        }
+      ]
+    );
 
-//     console.log(`Updated ${result.modifiedCount} documents`);
-//     mongoose.connection.close();
-//   } 
+    console.log(`Updated ${result.modifiedCount} documents`);
+  } catch (err) {
+    console.error('Error during migration:', err);
+  }
+  // Remove connection close if the app needs MongoDB later
+  // mongoose.connection.close();
+}
 
-
-// Export both the model and the migration function
-module.exports = {
-  User,
-  // updateExistingDocuments
-};
+module.exports = { User, updateExistingDocuments };
