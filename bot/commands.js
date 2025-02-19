@@ -765,7 +765,9 @@ const customRangeBroadcast = async (chatId, limit) => {
         adminStates[chatId] = { action: 'old_awaiting_duration' };
         break;
       case 'view_users':
-        await bot.sendMessage(chatId,"Total Users : "+ await User.find());
+        const users = await User.find();
+        await bot.sendMessage(chatId, "Total Users : " + users.length);
+      break;
       case 'custom_range':
         const customRangeOptions = {
           reply_markup: {

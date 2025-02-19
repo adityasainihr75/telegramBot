@@ -1,0 +1,7 @@
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-19T16:08:14.352Z"}
+{"level":"info","message":"Bot @VviPUrlBot is active","timestamp":"2025-02-19T16:08:14.357Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-02-19T16:08:15.102Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-02-19T16:08:15.235Z"}
+{"level":"info","message":"Preloaded recent links into memory.","timestamp":"2025-02-19T16:08:15.288Z"}
+{"level":"info","message":"Admin commands set successfully","timestamp":"2025-02-19T16:08:15.323Z"}
+{"level":"info","message":"Default commands set successfully","timestamp":"2025-02-19T16:08:15.346Z"}
