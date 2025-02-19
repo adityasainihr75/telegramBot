@@ -84,6 +84,7 @@ const setupBot = (bot) => {
     const dbMenuButtons = {
       reply_markup: {
         inline_keyboard: [
+          [{ text: '📊 View All Users', callback_data: 'view_users' }],
           [{ text: '🚫 View Blocked Users', callback_data: 'view_blocked' }],
           [{ text: '💤 View Not Interacted Users', callback_data: 'view_chat_not_found' }],
           [{ text: '🗑️ Clean Database', callback_data: 'clean_db' }],
@@ -763,6 +764,10 @@ const customRangeBroadcast = async (chatId, limit) => {
         await bot.sendMessage(chatId, '📝 Please type your time duration in (e.g., 2d, 3w, 6m):\n d->days ,w->week,m->month,y->year');
         adminStates[chatId] = { action: 'old_awaiting_duration' };
         break;
+      case 'view_users':
+        const users = await User.find();
+        await bot.sendMessage(chatId, "Total Users : " + users.length);
+      break;
       case 'custom_range':
         const customRangeOptions = {
           reply_markup: {
