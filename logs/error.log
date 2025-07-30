@@ -69,3 +69,4 @@
 {"level":"error","message":"Failed to send to user 7648229827:","timestamp":"2025-07-30T04:33:46.308Z"}
 {"level":"error","message":"Failed to send to user 7665397652:","timestamp":"2025-07-30T04:33:46.920Z"}
 {"level":"error","message":"Failed to send to user 8079995778:","timestamp":"2025-07-30T04:33:47.534Z"}
+{"level":"error","message":"Redis connection error: ","timestamp":"2025-07-30T04:37:32.641Z"}

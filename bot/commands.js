@@ -55,6 +55,64 @@ const setupBot = (bot) => {
   // Delay helper to prevent hitting rate limits
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+  // User registration function
+  const registerUser = async (msg) => {
+    try {
+      const telegramUserId = msg.from.id;
+      const firstName = msg.from.first_name;
+      const lastName = msg.from.last_name;
+      const username = msg.from.username;
+
+      // Check if user already exists
+      let user = await User.findOne({ telegramUserId });
+
+      if (!user) {
+        // Create new user
+        user = new User({
+          telegramUserId,
+          firstName,
+          lastName,
+          username,
+        });
+        await user.save();
+        logger.info(
+          `New user registered: ${user._id} ${user.firstName} (@${
+            user.username || "no_username"
+          })`
+        );
+      } else {
+        // Update existing user info in case it changed
+        let updated = false;
+        if (user.firstName !== firstName) {
+          user.firstName = firstName;
+          updated = true;
+        }
+        if (user.lastName !== lastName) {
+          user.lastName = lastName;
+          updated = true;
+        }
+        if (user.username !== username) {
+          user.username = username;
+          updated = true;
+        }
+
+        if (updated) {
+          await user.save();
+          logger.info(
+            `Updated user info: ${user._id} ${user.firstName} (@${
+              user.username || "no_username"
+            })`
+          );
+        }
+      }
+
+      return user;
+    } catch (error) {
+      logger.error(`Error registering user: ${error.message}`);
+      return null;
+    }
+  };
+
   /*** UI Helper Functions ***/
   const showAdminMenu = async (chatId) => {
     const menuButtons = {
@@ -646,6 +704,9 @@ const setupBot = (bot) => {
     const lastName = msg.from.last_name;
     const username = msg.from.username;
     const photo = msg.photo;
+
+    // Register user in database (for all interactions)
+    await registerUser(msg);
 
     // Handle photo messages for broadcast
     if (

@@ -166,3 +166,10 @@
 {"level":"error","message":"Failed to send to user 7648229827:","timestamp":"2025-07-30T04:33:46.308Z"}
 {"level":"error","message":"Failed to send to user 7665397652:","timestamp":"2025-07-30T04:33:46.920Z"}
 {"level":"error","message":"Failed to send to user 8079995778:","timestamp":"2025-07-30T04:33:47.534Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-30T04:37:32.103Z"}
+{"level":"info","message":"Bot @@VviPUrlBot is active","timestamp":"2025-07-30T04:37:32.138Z"}
+{"level":"error","message":"Redis connection error: ","timestamp":"2025-07-30T04:37:32.641Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-07-30T04:37:33.278Z"}
+{"level":"info","message":"Preloaded recent links into memory.","timestamp":"2025-07-30T04:37:33.427Z"}
+{"level":"info","message":"Default commands set successfully","timestamp":"2025-07-30T04:37:34.206Z"}
+{"level":"info","message":"Admin commands set successfully for user:","timestamp":"2025-07-30T04:37:34.587Z"}
