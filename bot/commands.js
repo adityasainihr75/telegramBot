@@ -10,6 +10,14 @@ const setupBot = (bot) => {
   /*** Command Setup ***/
   const setAdminCommands = async () => {
     try {
+      // First set default commands for all users (only /start)
+      await bot.setMyCommands(
+        [{ command: "start", description: "Start bot" }],
+        { scope: { type: "default" } }
+      );
+      logger.info("Default commands set successfully");
+
+      // Then set admin commands for the specific admin user
       await bot.setMyCommands(
         [
           { command: "start", description: "Start bot" },
@@ -22,9 +30,9 @@ const setupBot = (bot) => {
         ],
         { scope: { type: "chat", chat_id: Number(adminChatId) } }
       );
-      logger.info("Admin commands set successfully");
+      logger.info("Admin commands set successfully for user:", adminChatId);
     } catch (error) {
-      logger.error("Failed to set admin commands:", error.message);
+      logger.error("Failed to set commands:", error.message);
       if (error.response) {
         logger.error("Response status:", error.response.statusCode);
         logger.error("Response data:", error.response.body);
@@ -32,21 +40,10 @@ const setupBot = (bot) => {
     }
   };
 
-  const setDefaultCommands = async () => {
-    try {
-      await bot.setMyCommands(
-        [{ command: "start", description: "Start bot" }],
-        { scope: { type: "default" } }
-      );
-      logger.info("Default commands set successfully");
-    } catch (error) {
-      logger.error("Failed to set default commands:", error);
-    }
-  };
-
-  // Initialize commands
-  setAdminCommands();
-  setDefaultCommands();
+  // Initialize commands with a small delay to ensure bot is ready
+  setTimeout(() => {
+    setAdminCommands();
+  }, 1000);
 
   /*** Admin State ***/
   // This object tracks the current admin action by chatId.

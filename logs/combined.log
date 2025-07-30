@@ -110,3 +110,59 @@
 {"level":"error","message":"Failed to send to user 670329869:","timestamp":"2025-07-30T04:29:36.888Z"}
 {"level":"error","message":"Failed to send to user 795003605:","timestamp":"2025-07-30T04:30:27.856Z"}
 {"level":"error","message":"Failed to send to user 795003605:","timestamp":"2025-07-30T04:30:37.500Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-30T04:31:38.100Z"}
+{"level":"info","message":"Bot @@VviPUrlBot is active","timestamp":"2025-07-30T04:31:38.113Z"}
+{"level":"error","message":"Redis connection error: ","timestamp":"2025-07-30T04:31:38.476Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-07-30T04:31:39.259Z"}
+{"level":"info","message":"Preloaded recent links into memory.","timestamp":"2025-07-30T04:31:39.397Z"}
+{"level":"info","message":"Admin commands set successfully","timestamp":"2025-07-30T04:31:39.425Z"}
+{"level":"info","message":"Default commands set successfully","timestamp":"2025-07-30T04:31:39.441Z"}
+{"level":"error","message":"Failed to send to user 622057003:","timestamp":"2025-07-30T04:33:14.925Z"}
+{"level":"error","message":"Failed to send to user 670329869:","timestamp":"2025-07-30T04:33:15.542Z"}
+{"level":"error","message":"Failed to send to user 795003605:","timestamp":"2025-07-30T04:33:16.181Z"}
+{"level":"error","message":"Failed to send to user 957412012:","timestamp":"2025-07-30T04:33:16.818Z"}
+{"level":"error","message":"Failed to send to user 1034689116:","timestamp":"2025-07-30T04:33:17.436Z"}
+{"level":"error","message":"Failed to send to user 1154763535:","timestamp":"2025-07-30T04:33:18.043Z"}
+{"level":"error","message":"Failed to send to user 1327646038:","timestamp":"2025-07-30T04:33:18.689Z"}
+{"level":"error","message":"Failed to send to user 1338873640:","timestamp":"2025-07-30T04:33:19.375Z"}
+{"level":"error","message":"Failed to send to user 1606716431:","timestamp":"2025-07-30T04:33:20.057Z"}
+{"level":"error","message":"Failed to send to user 1868696917:","timestamp":"2025-07-30T04:33:20.693Z"}
+{"level":"error","message":"Failed to send to user 1919779107:","timestamp":"2025-07-30T04:33:21.343Z"}
+{"level":"error","message":"Failed to send to user 1936759125:","timestamp":"2025-07-30T04:33:21.961Z"}
+{"level":"error","message":"Failed to send to user 1940424698:","timestamp":"2025-07-30T04:33:22.653Z"}
+{"level":"error","message":"Failed to send to user 2127189167:","timestamp":"2025-07-30T04:33:23.164Z"}
+{"level":"error","message":"Failed to send to user 5069555045:","timestamp":"2025-07-30T04:33:23.778Z"}
+{"level":"error","message":"Failed to send to user 5224771027:","timestamp":"2025-07-30T04:33:24.372Z"}
+{"level":"error","message":"Failed to send to user 5269905771:","timestamp":"2025-07-30T04:33:24.995Z"}
+{"level":"error","message":"Failed to send to user 5398619530:","timestamp":"2025-07-30T04:33:26.162Z"}
+{"level":"error","message":"Failed to send to user 5409990047:","timestamp":"2025-07-30T04:33:26.762Z"}
+{"level":"error","message":"Failed to send to user 5841229780:","timestamp":"2025-07-30T04:33:27.462Z"}
+{"level":"error","message":"Failed to send to user 5845665588:","timestamp":"2025-07-30T04:33:28.179Z"}
+{"level":"error","message":"Failed to send to user 5858304966:","timestamp":"2025-07-30T04:33:28.801Z"}
+{"level":"error","message":"Failed to send to user 5972485607:","timestamp":"2025-07-30T04:33:29.400Z"}
+{"level":"error","message":"Failed to send to user 5980047239:","timestamp":"2025-07-30T04:33:30.535Z"}
+{"level":"error","message":"Failed to send to user 6013174441:","timestamp":"2025-07-30T04:33:31.255Z"}
+{"level":"error","message":"Failed to send to user 6102750657:","timestamp":"2025-07-30T04:33:31.878Z"}
+{"level":"error","message":"Failed to send to user 6106370996:","timestamp":"2025-07-30T04:33:32.474Z"}
+{"level":"error","message":"Failed to send to user 6123826240:","timestamp":"2025-07-30T04:33:33.130Z"}
+{"level":"error","message":"Failed to send to user 6125713166:","timestamp":"2025-07-30T04:33:33.714Z"}
+{"level":"error","message":"Failed to send to user 6220110349:","timestamp":"2025-07-30T04:33:34.429Z"}
+{"level":"error","message":"Failed to send to user 6265114754:","timestamp":"2025-07-30T04:33:35.154Z"}
+{"level":"error","message":"Failed to send to user 6290069313:","timestamp":"2025-07-30T04:33:35.767Z"}
+{"level":"error","message":"Failed to send to user 6555690475:","timestamp":"2025-07-30T04:33:36.388Z"}
+{"level":"error","message":"Failed to send to user 6627872667:","timestamp":"2025-07-30T04:33:36.974Z"}
+{"level":"error","message":"Failed to send to user 6696686119:","timestamp":"2025-07-30T04:33:37.602Z"}
+{"level":"error","message":"Failed to send to user 6972474242:","timestamp":"2025-07-30T04:33:38.214Z"}
+{"level":"error","message":"Failed to send to user 6978526200:","timestamp":"2025-07-30T04:33:38.823Z"}
+{"level":"error","message":"Failed to send to user 7008389497:","timestamp":"2025-07-30T04:33:39.904Z"}
+{"level":"error","message":"Failed to send to user 7030078193:","timestamp":"2025-07-30T04:33:40.571Z"}
+{"level":"error","message":"Failed to send to user 7075328060:","timestamp":"2025-07-30T04:33:41.196Z"}
+{"level":"error","message":"Failed to send to user 7082833366:","timestamp":"2025-07-30T04:33:41.902Z"}
+{"level":"error","message":"Failed to send to user 7103860619:","timestamp":"2025-07-30T04:33:42.552Z"}
+{"level":"error","message":"Failed to send to user 7129250419:","timestamp":"2025-07-30T04:33:43.154Z"}
+{"level":"error","message":"Failed to send to user 7195603395:","timestamp":"2025-07-30T04:33:43.910Z"}
+{"level":"error","message":"Failed to send to user 7432153442:","timestamp":"2025-07-30T04:33:45.065Z"}
+{"level":"error","message":"Failed to send to user 7582987874:","timestamp":"2025-07-30T04:33:45.693Z"}
+{"level":"error","message":"Failed to send to user 7648229827:","timestamp":"2025-07-30T04:33:46.308Z"}
+{"level":"error","message":"Failed to send to user 7665397652:","timestamp":"2025-07-30T04:33:46.920Z"}
+{"level":"error","message":"Failed to send to user 8079995778:","timestamp":"2025-07-30T04:33:47.534Z"}
