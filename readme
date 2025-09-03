@@ -13,3 +13,14 @@ flow:
 User → /securelink → Bot → Store in DB → Generate Masked Link
                       ↓
 User Clicks Link → Bot → Mini-App → API → DB → Redirect (tg://)
+
+env creds formats:
+//APP_NAME is the web app name that you have linked with your bot in botfather 
+APP_NAME = *******
+BOT_OWNER_ID = *******
+BOT_TOKEN = *******
+BOT_USERNAME = *******
+MONGODB_URI = *******
+port = *******
+REDIS_URI = *******
+Tester_ID = 
